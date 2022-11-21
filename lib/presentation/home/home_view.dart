@@ -4,10 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imdb/app/di.dart';
 import 'package:imdb/presentation/layout/base_cubit/base_cubit.dart';
 import 'package:imdb/presentation/layout/base_cubit/base_states.dart';
-import 'package:imdb/presentation/resources/font_manager.dart';
 import 'package:imdb/presentation/resources/values_manager.dart';
 import '../../domain/usecases/get_top_250_usecase.dart';
-import '../resources/color_manager.dart';
 import '../resources/components_widgets.dart';
 
 class HomeView extends StatelessWidget {
@@ -33,30 +31,10 @@ class HomeView extends StatelessWidget {
                       slivers: [
                         const SliverToBoxAdapter(
                           child: SizedBox(
-                            height: AppSize.s40,
+                            height: AppSize.s220,
                           ),
                         ),
-                        SliverToBoxAdapter(
-                          child: Row(
-                            children: const [
-                              Expanded(
-                                child: Text(
-                                  "IMDB AMS APP",
-                                  style: TextStyle(
-                                    color: ColorManager.white,
-                                    fontSize: FontSize.s20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SliverToBoxAdapter(
-                          child: SizedBox(
-                            height: AppSize.s20,
-                          ),
-                        ),
+                 
                         SliverList(
                           delegate: SliverChildBuilderDelegate(
                             (context, index) =>

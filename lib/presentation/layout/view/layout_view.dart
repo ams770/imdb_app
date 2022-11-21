@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imdb/presentation/home/home_view.dart';
+import 'package:imdb/presentation/resources/assets_manager.dart';
 import 'package:imdb/presentation/resources/color_manager.dart';
 import '../../../app/di.dart';
 import '../../../domain/usecases/get_top_250_usecase.dart';
@@ -15,7 +15,8 @@ class LayoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BaseCubit()..getTop250Movie(context, instance<GetTop250MovieUseCase>()),
+      create: (context) => BaseCubit()
+        ..getTop250Movie(context, instance<GetTop250MovieUseCase>()),
       child: Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: ColorManager.offWhite,
@@ -46,14 +47,20 @@ class LayoutView extends StatelessWidget {
                   ],
                 ),
               ),
+              child: Center(
+                child: Image.asset(
+                  ImageAssets.logo,
+                  height: AppSize.s115,
+                ),
+              ),
             ),
             const Padding(
               padding: EdgeInsets.only(
                 right: AppPadding.p15,
                 left: AppPadding.p15,
-                top: AppPadding.p10,
+                // top: AppPadding.p10,
               ),
-                child: HomeView(),
+              child: HomeView(),
             )
           ],
         ),

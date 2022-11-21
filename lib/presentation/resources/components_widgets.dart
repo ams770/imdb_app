@@ -38,60 +38,99 @@ class MovieBuilder extends StatelessWidget {
             alignment: Alignment.topRight,
             children: [
               MovieImageBuilder(_movie.image),
-              Container(
-                margin: const EdgeInsets.all(AppMargin.m8),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.star_rate_rounded,
-                      color: ColorManager.primary,
-                    ),
-                    Text(
-                      _movie.imDbRating,
-                      style: getRegularStyle(
-                          color: ColorManager.white,
-                          fontSize: FontSize.s15,
-                          hasShadow: true),
-                    ),
-                  ],
-                ),
-              ),
+              MovieRate(
+                rate: _movie.imDbRating,
+                hasShadow: true,
+                textColor: ColorManager.white,
+              )
             ],
           ),
-          BluredBackgroundText(_movie.fullTitle),
+          BluredBackgroundContainer(
+            child: Text(
+              _movie.title,
+              style: getBoldStyle(
+                color: ColorManager.white,
+                fontSize: FontSize.s16,
+                hasShadow: true,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
-  
 }
 
-class BluredBackgroundText extends StatelessWidget {
-  const BluredBackgroundText(this.text, {super.key});
-  final String text;
+class MovieRate extends StatelessWidget {
+  const MovieRate(
+      {super.key,
+      required this.rate,
+      required this.hasShadow,
+      required this.textColor});
+  final String rate;
+  final bool hasShadow;
+  final Color textColor;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: AppMargin.m12,
-        horizontal: AppMargin.m12,
+      margin: const EdgeInsets.all(AppMargin.m8),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.star_rate_rounded,
+            color: ColorManager.primary,
+            size: AppSize.s20,
+          ),
+          const SizedBox(
+            width: AppSize.s3,
+          ),
+          Text(
+            rate,
+            style: getRegularStyle(
+              color: textColor,
+              fontSize: FontSize.s12,
+              hasShadow: hasShadow,
+            ),
+          ),
+        ],
       ),
-      padding: const EdgeInsets.symmetric(
-        vertical: AppPadding.p10,
-        horizontal: AppPadding.p8,
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class BluredBackgroundContainer extends StatelessWidget {
+  BluredBackgroundContainer({
+    super.key,
+    required this.child,
+    this.boderRaduis = AppSize.s30,
+    this.horizontalMargin = AppMargin.m12,
+    this.virtcalMargin = AppMargin.m12,
+    this.horizontalPadding = AppPadding.p8,
+    this.virtcalPadding = AppPadding.p10,
+  });
+  final Widget child;
+  double boderRaduis;
+  double horizontalMargin;
+  double virtcalMargin;
+  double horizontalPadding;
+  double virtcalPadding;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        vertical: virtcalMargin,
+        horizontal: horizontalMargin,
+      ),
+      padding: EdgeInsets.symmetric(
+        vertical: virtcalPadding,
+        horizontal: horizontalPadding,
       ),
       decoration: BoxDecoration(
-        color: Colors.transparent.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(AppSize.s20),
+        color: Colors.transparent.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(boderRaduis),
       ),
-      child: Text(
-        text,
-        style: getBoldStyle(
-          color: ColorManager.white,
-          fontSize: FontSize.s16,
-          hasShadow: true,
-        ),
-      ),
+      child: child,
     );
   }
 }
@@ -139,22 +178,17 @@ class BackgroundImageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // showImage(context, imageUrl);
-      },
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            const LoadingWave(),
-        errorWidget: (context, url, error) => const Icon(
-          Icons.error_sharp,
-          color: ColorManager.error,
-        ),
-        height: infinitHeight ? double.infinity : size,
-        width: infinitWidth ? double.infinity : size,
-        fit: BoxFit.cover,
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      progressIndicatorBuilder: (context, url, downloadProgress) =>
+          const LoadingFlick(),
+      errorWidget: (context, url, error) => const Icon(
+        Icons.error_sharp,
+        color: ColorManager.error,
       ),
+      height: infinitHeight ? double.infinity : size,
+      width: infinitWidth ? double.infinity : size,
+      fit: BoxFit.cover,
     );
   }
 }
