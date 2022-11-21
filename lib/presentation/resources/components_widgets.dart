@@ -63,6 +63,7 @@ class MovieBuilder extends StatelessWidget {
       ),
     );
   }
+  
 }
 
 class BluredBackgroundText extends StatelessWidget {
