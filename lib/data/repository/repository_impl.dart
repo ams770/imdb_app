@@ -35,6 +35,9 @@ class RepositoryImpl extends Repository {
         return Right(movies);
         
       } catch (e) {
+        
+        ///todo implement your error handler first then use it here
+        
         // request error
          return Left(Failure(1, "something went wrong, please try again later"));
       }
