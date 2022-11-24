@@ -86,7 +86,7 @@ class MovieView extends StatelessWidget {
               ),
             ),
 
-            expandedHeight: MediaQuery.of(context).size.height / 2,
+            expandedHeight: MediaQuery.of(context).size.height / AppSize.s1_6,
             toolbarHeight: AppSize.s0,
             collapsedHeight: AppSize.s0, // of pinned bar
           ),
