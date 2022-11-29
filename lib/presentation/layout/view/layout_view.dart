@@ -26,6 +26,8 @@ class LayoutView extends StatelessWidget {
           elevation: AppSize.s0,
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
           ),
         ),
         body: Stack(

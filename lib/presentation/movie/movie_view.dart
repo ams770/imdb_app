@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:imdb/domain/models/models.dart';
 import 'package:imdb/presentation/resources/strings_manager.dart';
 import 'package:imdb/presentation/resources/values_manager.dart';
@@ -15,6 +16,16 @@ class MovieView extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: false,
+      appBar: AppBar(
+         backgroundColor: Colors.transparent,
+          toolbarHeight: AppSize.s0,
+          elevation: AppSize.s0,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
+          ),
+      ),
       body: CustomScrollView(
         clipBehavior: Clip.hardEdge,
         // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
